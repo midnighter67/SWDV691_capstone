@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewPort" content="width-device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link href="static\css\main.css" rel="stylesheet" />
+        <title>Happy Home</title>
+    </head>
+    <body>
+        <!-- <div class="container"> -->
+            <!-- HEADER - logo navbar -->
+            <div class="header">
+
+                <div class="logo">
+                    <img class="mylogo" src="images\logo.png" alt="Precise Detal company logo" role="company logo">
+                </div>
+                
+                <div class="nav">
+                <!--
+                <div class="hButton">
+                    <button class="hamburger-menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    </button>
+                </div>
+                -->
+                    <div class="nav-links">
+                        <ul>
+                            <li><a class="navlink" href="#">Home</a></li>
+                            <li><a class="navlink" href="#">Services</a></li>
+                            <li><a class="navlink" href="#">Reviews</a></li>
+                            <li><a class="navlink" href="#">Login</a></li>
+                            <li><a class="navlink" href="#">Create Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <div class="hbutton">
+                    <!-- hamburger menu -->
+                    <input type="checkbox" id="hamburger-input" class="burger-shower" />
+                    <label id="hamburger-menu" for="hamburger-input">
+                    <nav id="sidebar-menu">
+                        <h3>Menu</h3>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Reviews</a></li>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">Create Account</a></li>
+                        </ul>
+                    </nav>
+                    </label>
+                </div>
+                <div class="overlay"></div>
+            
+        
+    
+            </div> <!-- end header-->
+                
+            {% block content %}
+
+
+            {% endblock %}
+            <footer>
+                <div class="footer_left">
+                    <ul>
+                      <li><a class="navlink" href="home.html">Home</a></li>
+                      <li><a class="navlink" href="about.html">About</a></li>
+                      <li><a class="navlink" href="services.html">Services</a></li>
+                      <li><a class="navlink" href="quote.html">Quote</a></li>
+                      <li><a class="navlink" href="reviews.html">Reviews</a></li>
+                    </ul>
+                    <div class="footer-copyright">
+                        &copy2022 Precise Detail  Colo Spgs, CO
+                    </div>
+                </div>
+                <div class="footer_right">
+                    <div class="phone" style="font-size: .8em">
+                        719-555-5555
+                    </div>
+                    <div class="email">
+                        mike@precisedetail.com
+                    </div>
+                </div>
+            </footer>
+        <!-- </div> --> <!-- container -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </body>
+
+</html>

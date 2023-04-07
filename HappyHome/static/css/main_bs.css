@@ -1,0 +1,25 @@
+/* colors
+    Golden Rod:        #D5B740
+    Sienna:            #8A6822
+    Beige:             #E9E7CE
+    Dark Olive Green:  #7F664A
+    Dark Khaki:        #ABB26D
+*/
+body {
+  font-family: "Gill Sans", Helvetica, Arial, "sans-serif";
+}
+
+.navbar {
+  background-color:#E9E7CE;  
+  font-family: Gill Sans;
+}
+.navbar-toggler {
+  margin-left: 85%;
+}
+#logo {
+  padding-left: 20px;
+}
+
+.container-footer {
+  background-color:  #E9E7CE
+}
