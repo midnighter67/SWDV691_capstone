@@ -9,10 +9,10 @@
     </head>
     <body>
         
-        <nav class="navbar navbar-expand-lg py-4">
+        <nav class="navbar navbar-expand-sm py-4">
             <div class="container-fluid">
                 <a class="navbar-brand px-4" href="#">
-                    <img src="static\images\HappyHome.png" width="300" height="100" alt="Bootstrap">
+                    <img src="static\images\HappyHome.png" width="300" height="100" alt="Happy Home">
                     </a>
                 <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse justify-content-end px-4" id="navbarSupportedContent" id="navbarNav"> 
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Services</a>
@@ -29,51 +29,63 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reviews</a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'userProfile' %}">Profile</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Create Account</a>
+                        <a class="nav-link" href="{% url 'createAccount' %}">Create Account</a>
                     </li>
                 </ul>
                 </div> <!-- collapse -->
             </div> <!-- container-fluid -->
         </nav>
+        <br/>
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    
+                    <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close" style="border: none; background-color: blue;">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+            {% endif %}
+        </div><!-- container -->
 
         {% block content %}
 
 
         {% endblock %}
         
-        <footer class="bg-dark text-white pt-5 pb-4" style="background-color: beige;">
+<!--
+        <footer class="text-black pt-5 pb-4">
             <div class="container text-center text-md-left">
                 <div class="row text-center text-md-left">
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Column 1</h5>
-                        <p>blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</p>
+                        <p>blah blah blah blah blah blah</p>
                     </div>
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Column 2</h5>
                         <p>
                             <a href="#" class="text-white" style="text-decoration: none;">Link 1</a>
                         </p>
-                        <p>
-                            <a href="#" class="text-white" style="text-decoration: none;">Link 2</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-white" style="text-decoration: none;">Link 3</a>
-                        </p>
                     </div>
                     <div class="col-md3 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Column 3</h5>
                         <p>
                             <a href="#" class="text-white" style="text-decoration: none;">Link 1</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-white" style="text-decoration: none;">Link 2</a>
-                        </p>
-                        <p>
-                            <a href="#" class="text-white" style="text-decoration: none;">Link 3</a>
                         </p>
                     </div>
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
@@ -85,7 +97,7 @@
                     <div>
 
                     </div>
-                </div> <!-- row -->
+                </div> 
                 <hr class="mb-4">
                 <div class="row align-items-center">
                     <div class="col-md-7 col-lg-8">
@@ -94,12 +106,12 @@
                         </p>
                     </div>
                 </div>
-            </div> <!-- container-->
+            </div> 
         </footer>
+
+-->
         
-            
-        
-    </div>
+    
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->

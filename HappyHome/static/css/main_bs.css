@@ -8,7 +8,9 @@
 body {
   font-family: "Gill Sans", Helvetica, Arial, "sans-serif";
 }
-
+footer {
+  background-color: #E9E7CE;
+}
 .navbar {
   background-color:#E9E7CE;  
   font-family: Gill Sans;
@@ -19,7 +21,12 @@ body {
 #logo {
   padding-left: 20px;
 }
-
-.container-footer {
-  background-color:  #E9E7CE
+.footer {
+  background-color:  #E9E7CE;
+}
+.btn {
+  background-color: #E9E7CE; 
+  border-color: #7F664A; 
+  border-radius: 3px; 
+  color: #7F664A;
 }
