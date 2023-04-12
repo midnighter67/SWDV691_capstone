@@ -3,13 +3,12 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.http import HttpResponse
 from django.http import HttpRequest
-from .models import Provider, User, Review, Reply
+from .models import Provider, User, Review, Reply, Category, Classification
 from .forms import RegisterUserForm, EditProfileForm
 from django.contrib import messages
-
 import json
-# import requests
-from .models import Provider, User, Category, Classification, Review, Reply
+
+
 
 # views
 def home(request):
@@ -81,3 +80,11 @@ def change_password(request):
         form =PasswordChangeForm(user=request.user)
     context = {'form': form}
     return render(request, 'change_password.html', context)
+
+def search_results(request):
+    if request.method == "POST":
+        text = request.POST['searchText']
+        results = Provider.objects.filter(name__contains=text)
+        return render(request, 'results.html', {'results':results})
+    else:
+        return render(request, 'results.html', {})

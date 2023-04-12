@@ -24,9 +24,10 @@ footer {
 .footer {
   background-color:  #E9E7CE;
 }
-.btn {
+.btn .dropdown{
   background-color: #E9E7CE; 
   border-color: #7F664A; 
   border-radius: 3px; 
   color: #7F664A;
 }
+
