@@ -64,7 +64,7 @@ def register_user(request):
     context = {'form': form}
     return render(request, 'create_user.html', context)
 
-def edit_profile(request):
+def edit_profile_OLD(request):
     if request.method == "POST":
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -76,12 +76,13 @@ def edit_profile(request):
     context = {'form': form}
     return render(request, 'user_profile.html', context)
 
-def edit_profile_2(request):
+def edit_profile(request):
     if request.user.is_authenticated:
         data = SiteUser.objects.filter(ref=request.user)
-        return render(request, 'user_profile_2.html', {'data': data})
+        
+        return render(request, 'user_profile.html', {'data': data})
     else:
-        return render(request, 'user_profile_2.html', {})
+        return render(request, 'user_profile.html', {})
 
 def change_password(request):
     if request.method == "POST":
@@ -90,7 +91,7 @@ def change_password(request):
           form.save()
           update_session_auth_hash(request, form.user) # so updating password doesn't logout user
           messages.success(request, ('Password updated'))
-          return redirect('user_profile')
+          return redirect('user_profile') # userProfile?
     else:
         form =PasswordChangeForm(user=request.user)
     context = {'form': form}
@@ -103,3 +104,30 @@ def search_results(request):
         return render(request, 'results.html', {'results':results})
     else:
         return render(request, 'results.html', {})
+    
+def user_reviews(request):
+    if request.method == "POST":
+        mymethod = "post"
+    elif request.method == "GET":
+        mymethod = "get"
+    else:
+        mymethod = "neither post nor get"
+    return render(request, 'user_reviews.html', {'mymethod':mymethod})
+
+def update_user_profile(request):
+   if request.method == "POST":
+      pass
+   else:
+      pass
+   return render(request, 'user_profile.html', {})
+   
+"""
+fname = request.POST['first_name']
+        lname = request.POST['last_name']
+        address = request.POST['address']
+        city = request.POST['city']
+        state = request.POST['state']
+        zip = request.POST['zip']
+        email = request.POST['email']
+        phone = request.POST['phone']
+"""

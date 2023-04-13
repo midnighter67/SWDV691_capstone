@@ -24,10 +24,21 @@ footer {
 .footer {
   background-color:  #E9E7CE;
 }
-.dropdown .btn {
+.btn {
   background-color: #E9E7CE; 
   border-color: #7F664A; 
   border-radius: 3px; 
   color: #7F664A;
 }
-
+.dropdown {
+  background-color: #E9E7CE; 
+  border-color: #7F664A; 
+  border-radius: 3px; 
+  color: #7F664A;
+}
+.container-bordered {
+  border: 2px solid black;
+}
+a .page-links {
+  text-decoration: none;
+}
