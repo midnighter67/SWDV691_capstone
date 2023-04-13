@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
     <form method="POST" action="{% url 'userProfile' %}">
         {% csrf_token %}
         {% if form.errors %}
@@ -22,10 +23,12 @@
         {% endif %}
 
         {{ form.as_p }}
-        <input type="submit" value="Update" class="btn btn-secondary">
+        <input type="submit" value="Update" class="btn">
     </form>
     <br/>
     <p><small><a href="{% url 'change_password' %}"">Click Here</a> To change your password</small></p>
+
+
 
 
 {% endblock %}

@@ -4,26 +4,30 @@
 {% block content %}
 
 <div class="col-md-6 offset-md-3">
-    <form method="POST" action="{% url 'createAccount' %}">
-        {% csrf_token %}
-        {% if form.errors %}
-            <div class="alert alert-warning alert-dismissable" role="alert">
-                
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <p>Errors:</p>
-                {% for field in form %}
-                    {% if field.errors %}
-                        {{ field.errors }}
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        {{ form.as_p }}
-        <input type="submit" value="Register" class="btn btn-secondary">
-    </form>
+    {% if user.is_authenticated %}
+        <h5>You are logged in as {{ user.username}}</h5>
+    {% else %}
+        <form method="POST" action="{% url 'createAccount' %}">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissable" role="alert">
+                    
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>Errors:</p>
+                    {% for field in form %}
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        
+            {{ form.as_p }}
+            <input type="submit" value="Register" class="btn">
+        </form>
+    {% endif %}
 </div>
 
 

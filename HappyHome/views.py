@@ -3,13 +3,15 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.http import HttpResponse
 from django.http import HttpRequest
-from .models import Provider, User, Review, Reply, Category, Classification
+from .models import Provider, SiteUser, Review, Reply, Category, Classification
 from .forms import RegisterUserForm, EditProfileForm
 from django.contrib import messages
 import json
 
 
-
+"""
+  register/login id used as provider_id/user_id, then lookup info with user.id
+"""
 # views
 def home(request):
     if request.method == 'GET':
@@ -43,13 +45,19 @@ def logout_user(request):
 def register_user(request):
     if request.method == "POST":
       form = RegisterUserForm(request.POST)
+      post = SiteUser()
       if form.is_valid():
          form.save()
+         post.first = form.cleaned_data['first_name']
+         post.last = form.cleaned_data['last_name']
+         post.email = form.cleaned_data['email']
          username = form.cleaned_data['username']
          password = form.cleaned_data['password1']
          user = authenticate(request, username=username, password=password)
          login(request, user)
          messages.success(request, ('Account created'))
+         post.ref = request.user
+         post.save()
          return redirect('home')
     else:
       form = RegisterUserForm()
@@ -67,6 +75,13 @@ def edit_profile(request):
         form =EditProfileForm(instance=request.user)
     context = {'form': form}
     return render(request, 'user_profile.html', context)
+
+def edit_profile_2(request):
+    if request.user.is_authenticated:
+        data = SiteUser.objects.filter(ref=request.user)
+        return render(request, 'user_profile_2.html', {'data': data})
+    else:
+        return render(request, 'user_profile_2.html', {})
 
 def change_password(request):
     if request.method == "POST":

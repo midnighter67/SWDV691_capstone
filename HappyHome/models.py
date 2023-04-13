@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # models
 
@@ -17,25 +18,23 @@ class Provider(models.Model):
     mobile = models.CharField(max_length=20, blank=True)
     work = models.CharField(max_length=20)
     description = models.CharField(max_length=5000, blank=True)
+    ref = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
 
-    def __str__(self):
-        return self.name
     
-class User(models.Model):
+class SiteUser(models.Model):
     user_id = models.BigAutoField(primary_key=True)
     first = models.CharField(max_length=50)
     last = models.CharField(max_length=50)
     address = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=2, blank=True)
-    zip = models.CharField(max_length=20)
+    zip = models.CharField(max_length=20, blank=True)
     email = models.EmailField(max_length=200)
     home = models.CharField(max_length=20, blank=True)
     mobile = models.CharField(max_length=20, blank=True)
     work = models.CharField(max_length=20, blank=True)
+    ref = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
 
-    def __str__(self):
-        return self.last + ", " + self.first
     
 class Category(models.Model):
     category_id = models.BigAutoField(primary_key=True)
@@ -58,7 +57,7 @@ class Classification(models.Model):
 class Review(models.Model):
     review_id = models.BigAutoField(primary_key=True)
     provider_id = models.ForeignKey(Provider, default=-1, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, default=-1, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(SiteUser, default=-1, on_delete=models.CASCADE)
     rating = models.IntegerField(default=5)
     text = models.CharField(max_length=1000, blank=True)
 

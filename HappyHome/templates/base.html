@@ -9,46 +9,46 @@
     </head>
     <body>
         <div class="container-fluid">
-        <nav class="navbar navbar-expand-sm">
-            <div class="container-fluid">
-                <a class="navbar-brand px-4" href="#">
-                    <img src="static\images\HappyHome.png" width="300" height="100" alt="Happy Home">
+            <nav class="navbar navbar-expand-sm">
+                <div class="container-fluid">
+                    <a class="navbar-brand px-4" href="#">
+                        <img src="static\images\HappyHome.png" width="300" height="100" alt="Happy Home">
                     </a>
-                <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <!-- navbar-brand in the navbar will pusht the toggler to the right - search navbar toggler -->
-                <div class="collapse navbar-collapse justify-content-end px-4" id="navbarSupportedContent" id="navbarNav"> 
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Reviews</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'userProfile' %}">Profile</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'createAccount' %}">Create Account</a>
-                    </li>
-                </ul>
-                </div> <!-- collapse -->
-            </div> <!-- container-fluid -->
-        </nav>
-    </div>
+                    <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <!-- navbar-brand in the navbar will pusht the toggler to the right - search navbar toggler -->
+                    <div class="collapse navbar-collapse justify-content-end px-4" id="navbarSupportedContent" id="navbarNav"> 
+                        <ul class="navbar-nav ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Reviews</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'userProfile' %}">Profile</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'createAccount' %}">Create Account</a>
+                            </li>
+                        </ul>
+                    </div> <!-- collapse -->
+                </div> <!-- container-fluid -->
+            </nav>
+        </div>
         <br/>
         <div class="container">
             {% if messages %}
@@ -59,17 +59,19 @@
                       
                     </button>
                    
-                  </div>
+                 </div>
                 {% endfor %}
             {% endif %}
         </div><!-- container -->
-        <div class="container pt-3 pb-3"></div>
+        <div class="container pt-3 pb-3">
         {% block content %}
 
 
+
+        
         {% endblock %}
         </div>
-        <div class="container-fluid pt-5 fixed-bottom">
+        <div class="container-fluid pt-5"> <!-- fixed-bottom -->
         <footer class="text-black pt-3">
             <div class="container text-center text-md-left">
                 <div class="row text-center text-md-left">
@@ -111,11 +113,8 @@
         </footer>
     </div>
 
-        
-    
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script> -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>  
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
     </body>
 
 </html>
