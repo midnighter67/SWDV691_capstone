@@ -85,10 +85,14 @@ WSGI_APPLICATION = 'CapstoneProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
     }
 }
+
+DATABASES['default'] = dj_database_url.config(default='postgres://aqfyfnbcsdngib:745ba3e8027ec88cbbaa5065798e887ddaaff0c776cb72c83aa7e7cc47e66502@ec2-54-208-11-146.compute-1.amazonaws.com:5432/d114ktgkthu98m')
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
