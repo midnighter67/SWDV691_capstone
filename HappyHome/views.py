@@ -77,10 +77,10 @@ def edit_profile_OLD(request):
     return render(request, 'user_profile.html', context)
 
 def edit_profile(request):
-    if request.user.is_authenticated:
-        data = SiteUser.objects.filter(ref=request.user)
-        
-        return render(request, 'user_profile.html', {'data': data})
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            data = SiteUser.objects.filter(ref=request.user)
+            return render(request, 'user_profile.html', {'data': data})
     else:
         return render(request, 'user_profile.html', {})
 
