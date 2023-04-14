@@ -95,7 +95,7 @@ def change_password(request):
     else:
         form =PasswordChangeForm(user=request.user)
     context = {'form': form}
-    return render(request, 'change_password.html', context)
+    return render(request, 'change_password.html', context) # return render(request, 'change_password.html', context)
 
 def search_results(request):
     if request.method == "POST":
