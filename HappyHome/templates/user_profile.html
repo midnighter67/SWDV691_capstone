@@ -7,54 +7,13 @@
 
 <div class="row d-flex justify-content-center pb-5">
     <div class="col-md-1">
-        <p><small><a class="page-links"  style="text-decoration: none;" href="{% url 'userReviews' %}">reviews</a></small></p>
+        <p><small><a class="page-links"  style="text-decoration: none;" href="{% url 'userProfile' %}">reviews</a></small></p>
     </div>
 </div>
 <div class="row">
     <div class="container-bordered border border-dark rounded-2 col-md-5 p-5 mx-auto">
-        <form method="POST" action="{% url 'userProfile' %}">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label  class="form-label">First</label>
-                <input type="text" class="form-control" name="first_name">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Address</label>
-                <input type="text" class="form-control" name="address">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">City</label>
-                <input type="text" class="form-control" name="city">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">State</label>
-                <input type="text" class="form-control" name="state">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Zip</label>
-                <input type="text" class="form-control" name="zip">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="text" class="form-control" name="email">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Phone</label>
-                <input type="text" class="form-control" name="phone">
-            </div>
-            <div>
-                <button class="btn" type="submit" style="border: 1px #7F664A solid; background-color: #E9E7CE; color: #7F664A;">Save</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-1"></div>
-    <div class="container-bordered border border-dark rounded-2 col-md-5 p-5 mx-auto my-auto">
-<!--
-        <form method="POST" action="{% url 'change_password' %}">
+
+        <form method="POST"> <!-- action="{% url 'updateUser' %}" -->
             {% csrf_token %}
             {% if form.errors %}
                 <div class="alert alert-warning alert-dismissable" role="alert">
@@ -71,13 +30,38 @@
                 </div>
             {% endif %}
     
-            {{ form.as_p }}
+            {{profile_form.as_p }}
             <input type="submit" value="Update" class="btn btn-secondary">
         </form>
--->
+    </div>
 
+    <div class="col-md-1"></div>
 
-        <form method="POST" action="{% url 'userProfile' %}">
+    <div class="container-bordered border border-dark rounded-2 col-md-5 p-5 mx-auto my-auto">
+
+        <form method="POST"> <!--  <form method="POST" action="{% url 'changePassword' %}"> -->
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissable" role="alert">
+                    
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>Errors:</p>
+                    {% for field in form %}
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+    
+            {{ password_form.as_p }}
+            <input type="submit" value="Update" class="btn btn-secondary">
+        </form>
+
+<!--
+        <form method="POST" action="{% url 'changePassword' %}">
             {% csrf_token %}
             <div class="mb-3">
                 <input type="password" class="form-control" placeholder="Old Password" name="old_pw">
@@ -92,20 +76,10 @@
                 <button class="btn" type="submit" style="border: 1px #7F664A solid; background-color: #E9E7CE; color: #7F664A;">Update</button>
             </div>
         </form>
-
-    </div>
-</div>
-<br/><br/>
-<p><small><a href="{% url 'change_password' %}"">Click Here</a> To change your password</small></p><br/>
-    
-
-<!--
-{% if user.is_authenticated %}
-    {% for datum in data %}
-        {{ datum.first }}<br/>
-        {{ datum.last }}<br/>
-        {{ datum.email }}<br/>
-    {% endfor %}
-{% endif %}
 -->
+    </div>
+</div> <!-- row -->
+<br/><br/>
+<p><small><a href="{% url 'changePassword' %}"">Click Here</a> To change your password</small></p><br/>
+    
 {% endblock %}

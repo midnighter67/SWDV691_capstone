@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.http import HttpResponse
 from django.http import HttpRequest
 from .models import Provider, SiteUser, Review, Reply, Category, Classification
-from .forms import RegisterUserForm, EditProfileForm
+from .forms import RegisterUserForm, EditProfileForm, UserProfileForm
 from django.contrib import messages
 import json
 
@@ -65,24 +65,16 @@ def register_user(request):
     return render(request, 'create_user.html', context)
 
 def edit_profile_OLD(request):
-    if request.method == "POST":
-        form = EditProfileForm(request.POST, instance=request.user)
+    if request.user.is_authenticated:
+        info = SiteUser.objects.get(ref=request.user)
+        form = UserProfileForm(request.POST or None, instance=info)
         if form.is_valid():
-          form.save()
-          messages.success(request, ('Profile updated'))
-          return redirect('user_profile')
-    else:
-        form =EditProfileForm(instance=request.user)
-    context = {'form': form}
-    return render(request, 'user_profile.html', context)
-
-def edit_profile(request):
-    if request.method == "POST":
-        if request.user.is_authenticated:
-            data = SiteUser.objects.filter(ref=request.user)
-            return render(request, 'user_profile.html', {'data': data})
-    else:
-        return render(request, 'user_profile.html', {})
+            form.save()
+            messages.success(request, ('Profile Updated'))
+            # return redirect('user_profile')
+        else:
+            messages.success(request, ('Update Failed'))
+    return render(request, 'user_profile.html', {'info': info, 'profile_form': form}) # {'info': info, 'form': form}
 
 def change_password(request):
     if request.method == "POST":
@@ -94,8 +86,8 @@ def change_password(request):
           return redirect('user_profile') # userProfile?
     else:
         form =PasswordChangeForm(user=request.user)
-    context = {'form': form}
-    return render(request, 'change_password.html', context) # return render(request, 'change_password.html', context)
+    context = {'password_form': form}
+    return render(request, 'user_profile.html', context) # return render(request, 'change_password.html', context)
 
 def search_results(request):
     if request.method == "POST":
@@ -114,20 +106,25 @@ def user_reviews(request):
         mymethod = "neither post nor get"
     return render(request, 'user_reviews.html', {'mymethod':mymethod})
 
-def update_user_profile(request):
-   if request.method == "POST":
-      pass
-   else:
-      pass
-   return render(request, 'user_profile.html', {})
+
+def edit_profile(request):
+    if request.user.is_authenticated:
+        info = SiteUser.objects.get(ref=request.user)
+        profile_form = UserProfileForm(request.POST or None, instance=info)
+        password_form = PasswordChangeForm(data=request.POST, user=request.user)
+        if request.method == "POST":
+            if profile_form in request.POST:
+                if profile_form.is_valid():
+                    profile_form.save()
+                    messages.success(request, ('Profile Updated'))
+            if password_form in request.POST:
+                if password_form.is_valid():
+                    password_form.save()
+                    update_session_auth_hash(request, password_form.user) # so updating password doesn't logout user
+                    messages.success(request, ('Password updated'))
+            # return redirect('user_profile')
+        context = {'profile_form':profile_form}
+    return render(request, 'user_profile.html', {'info': info, 'profile_form': profile_form})
+
+
    
-"""
-fname = request.POST['first_name']
-        lname = request.POST['last_name']
-        address = request.POST['address']
-        city = request.POST['city']
-        state = request.POST['state']
-        zip = request.POST['zip']
-        email = request.POST['email']
-        phone = request.POST['phone']
-"""
